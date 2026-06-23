@@ -7,9 +7,12 @@ const titleInput = document.getElementById("titleInput");
 const bodyInput = document.getElementById("bodyInput");
 const fetchButton = document.getElementById("fetchButton");
 
+// Counter for adding 5 new posts with fetch button
+let postIndex = 0;
+
 // To Display Existing Posts
 fetchButton.addEventListener("click", () => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
+    fetch(`https://jsonplaceholder.typicode.com/posts?_start=${postIndex}&_limit=5`)
         .then((response) => response.json())
         .then((data) => {
             console.log("existing posts", data);
@@ -22,6 +25,8 @@ fetchButton.addEventListener("click", () => {
                 </div>
                 <hr>`;
             }
+
+            postIndex += 5;
         })
         .catch((error) => console.error(error));
 });
